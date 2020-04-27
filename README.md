@@ -17,6 +17,7 @@
 ### Association
 - has_many :comments
 - has_many :users_groups
+- has_many  :users,  through:  :users_groups
 
 ## users_groupsテーブル
 |Column|Type|Options|
