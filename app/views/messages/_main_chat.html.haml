@@ -1,0 +1,38 @@
+.main_chat
+  .main_chat__group-info
+    .main_chat__group-info__team
+      %h2.main_chat__group-info__team__name
+        さといも
+      %ul.main_chat__group-info__team__member
+        Member : おいも
+    .main_chat__group-info__edit
+    = link_to '#' do
+      .main_chat__group-info__edit__btn 
+        Edit      
+  .main_chat__comment-list
+    .main_chat__comment-list__comment
+      .main_chat__comment-list__comment__info
+        %p.main_chat__comment-list__comment__info__name
+          おいも
+        %p.main_chat__comment-list__comment__info__date
+          2020/04/29(Wed)01:09:48
+      %p.main_chat__comment-list__comment__chat
+        おはよう
+
+    .main_chat__comment-list__comment
+      .main_chat__comment-list__comment__info
+        %p.main_chat__comment-list__comment__info__name
+          おいも
+        %p.main_chat__comment-list__comment__info__date
+          2020/04/29(Wed)01:10:06
+      %p.main_chat__comment-list__comment__chat
+        こんにちは
+    
+  .main_chat__comment-form
+    %form.new-message
+      .input-box
+        %input{type: "text",class: "input-box__text",placeholder: "type a message"}
+        %label{class: "input-box__image"}
+          = icon('fas','image')
+          %input{type: "file",class: "input-box__image__file"}
+      %input{type: "submit",class: "submit-btn",value: "Edit"}

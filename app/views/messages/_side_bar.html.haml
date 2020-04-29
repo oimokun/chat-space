@@ -1,0 +1,23 @@
+.side_bar
+  .side_bar__side-header
+    .side_bar__side-header__box
+      %p.side_bar__side-header__box__name
+        おいも
+      %ul.side_bar__side-header__box__icon
+        %li.side_bar__side-header__box__edit
+          = link_to '#' do
+            = icon('fas','edit') 
+        %li.side_bar__side-header__box__group
+          = link_to '#' do 
+            = icon('fas','cog') 
+  .side_bar__group-list
+    = link_to '#',class: "group" do
+      %p.side_bar__group-list__name
+        さといも
+      %p.side_bar__group-list__message
+        いもです
+    = link_to '#',class: "group" do
+      %p.side_bar__group-list__name
+        さつまいも
+      %p.side_bar__group-list__message
+        おいもです
