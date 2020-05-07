@@ -1,3 +1,27 @@
+.flash-box
+  %p.notice グループを作成しました
 .wrapper
-  = render "side_bar"
-  = render "main_chat"
+  = render"shared/side_bar"
+
+  .chat__main
+
+    .main-header
+      .main-header__leftbox
+        %h2.main-header__leftbox__currentgroup
+          =@group.name
+        %p.main-header__leftbox__memberlist
+          Member：
+          - @group.users.each do |user|
+            =user.name
+      .main-header__leftbox__edit-btn
+        =link_to "Edit","edit",class:"main-header__leftbox__edit-btn__text"
+    .messages
+      = render partial: 'message', collection: @messages
+    .form
+      = form_for [@group, @message] do |f|
+        = f.text_field :content, class: 'form__message', placeholder: 'type a message'
+        .form__mask
+          = f.label :image, class: 'form__mask__image' do
+            = fa_icon 'picture-o', class: 'icon'
+            = f.file_field :image, class: 'hidden'
+        = f.submit 'Send', class: 'form__submit'
