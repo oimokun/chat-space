@@ -12,15 +12,15 @@ $(function(){
                     </div>
                   </div>
                   <div class="message__text">
-                    <p class="message__text">
-                      ${message.body}
+                    <p class="lower-message__content">
+                      ${message.content}
                     </p>
                     ${image}
                   </div>
                 </div>`
     return html;
   }
-  $('.new_message').on('submit',function(e){
+  $('#new_message').on('submit',function(e){
     e.preventDefault();
     var formData = new FormData(this);
     var url = $(this).attr('action');
@@ -39,12 +39,33 @@ $(function(){
       $('#new_message')[0].reset();
       $('.form__submit').prop('disabled', false);
     })
-    .fail(function(data){
-      alert('エラーが発生したためメッセージは送信できませんでした。');
+    .fail(function(){
+      alert('error');
       $('.form__submit').prop('disabled', false);
     })
-    .always(function(data){
-      $('.submit-btn').prop('disabled', false);
-    })
   });
+
+  var reloadMessages = function(){
+    if (location.href.match(/groups\/\d+\/messages/)) {
+      var last_message_id = $('.message:last').data("message_id");
+      $.ajax({
+        url: "api/messages",
+        type: 'GET',
+        data: {id: last_message_id},
+        dataType: 'json'
+      })
+      .done(function(messages){
+        var insertHTML = '';
+        messages.forEach(function(message){
+          insertHTML += buildHTML(message);
+          $('.messages').append(insertHTML);
+          $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight},'fast');
+        });
+      })
+      .fail(function() {
+        alert('error');
+      });
+    };
+  };
+  setInterval(reloadMessages, 5000);
 });
