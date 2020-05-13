@@ -1,25 +1,46 @@
 $(function(){
   function buildHTML(message){
-    var image = message.image_url ? `<img class= "lower-message__image" src="${message.image_url}">` : "" ;
-
-    var html = `<div class="message" data-message_id="${message.id}">
-                  <div class="message__upper-info">
-                    <div class="message__upper-info__talker">
-                      ${message.user_name}
-                    </div>
-                    <div class="message__upper-info__date">
-                      ${message.created_at}
-                    </div>
-                  </div>
-                  <div class="message__text">
-                    <p class="lower-message__content">
-                      ${message.content}
-                    </p>
-                    ${image}
-                  </div>
-                </div>`
-    return html;
-  }
+    if ( message.image ) {
+        //data-idが反映されるようにしている
+        var html =
+         `<div class="message" data-message-id=${message.id}>
+            <div class="message__upper-info">
+              <div class="message__upper-info__talker">
+                ${message.user_name}
+              </div>
+              <div class="message__upper-info__date">
+                ${message.created_at}
+              </div>
+            </div>
+            <div class="message__text">
+              <p class="lower-message__content">
+                ${message.content}
+              </p>
+            </div>
+            <img src=${message.image} >
+          </div>`
+        return html;
+      } else {
+        //同様にdata-idが反映されるようにしている
+        var html =
+         `<div class="message" data-message-id=${message.id}>
+            <div class="message__upper-info">
+              <div class="message__upper-info__talker">
+                ${message.user_name}
+              </div>
+              <div class="message__upper-info__date">
+                ${message.created_at}
+              </div>
+            </div>
+            <div class="message__text">
+              <p class="lower-message__content">
+                ${message.content}
+              </p>
+            </div>
+          </div>`
+        return html;
+      };
+    }
   $('#new_message').on('submit',function(e){
     e.preventDefault();
     var formData = new FormData(this);
@@ -66,7 +87,7 @@ $(function(){
         alert('error');
       });
     };
-    
+
  if (location.href.match(/groups\/\d+\/messages/)) {
   setInterval(reloadMessages, 5000);
 };
